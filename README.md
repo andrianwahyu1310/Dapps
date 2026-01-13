@@ -1,359 +1,274 @@
-# Dapps
-# 📘 Day 1 – Blockchain Fundamentals & Avalanche Fundamentals
+# 🚀 Avalanche Full Stack dApp – Short Course at Pamulang University
+
+Short course ini dirancang untuk membantu peserta **membangun Full Stack dApp sederhana di jaringan Avalanche** dari nol hingga deployment, menggunakan **1 template project yang sama selama 5 hari**.
+
+Course ini cocok untuk:
+
+- Web developer yang ingin masuk ke Web3
+- Blockchain beginner–intermediate
+- Developer yang ingin membangun portfolio dApp nyata
 
 ---
 
-## Pre-Test
+## 🎯 Learning Objectives
 
-[Link](https://forms.gle/eQzbrmRQG7whqBRh8)
+Setelah menyelesaikan course ini, peserta mampu:
 
----
-
-> Avalanche Indonesia Short Course – **Day 1**
-
-Hari pertama difokuskan pada **Fundamental Layer**: bagaimana cara kerja blockahain Avalanche dan struktur dasar dari dApp.
-
-## 🎯 Tujuan Pembelajaran
-
-Pada akhir sesi Day 1, peserta mampu:
-
-- Memahami konsep dasar blockchain dan dApp
-- Memahami arsitektur Avalanche
-- Menjelaskan perbedaan Avalanche dan Ethereum
-- Memahami _mental model_ alur kerja dApp
-- Menggunakan Core wallet untuk Avalanche Testnet
-- Menjalankan template frontend dApp
-- Menghubungkan wallet ke dApp (connect wallet)
-- Menampilkan wallet address & network di UI
+- Memahami fundamental blockchain & Avalanche
+- Menulis dan deploy smart contract menggunakan Solidity & Hardhat
+- Membangun frontend dApp dengan Next.js & Tailwind CSS
+- Membangun backend API dengan NestJS
+- Mengintegrasikan smart contract, frontend, dan backend
+- Melakukan deployment full stack dApp
 
 ---
 
-## 🧩 Studi Kasus Day 1
+## 🧩 Studi Kasus
 
-### Avalanche Simple Full Stack dApp - Fundamental Layer
+### Avalanche Simple Full Stack dApp
 
-Hari pertama difokuskan pada **fondasi dApp**, yaitu:
+Fitur utama:
 
-- Wallet connection
-- Network detection
-- Frontend ↔ Wallet interaction
-- Setup template project
-
-> 📌 Semua fitur ini akan digunakan kembali dan dikembangkan sampai Day 5.
+- Connect wallet (Core Wallet)
+- Interaksi smart contract (read & write)
+- Penyimpanan data transaksi off-chain
+- Integrasi frontend, backend, dan blockchain
 
 ---
 
-## ⏱️ Struktur Sesi (3 Jam)
+## 🧱 Tech Stack
 
-| Sesi    | Durasi | Aktivitas                     |
-| ------- | ------ | ----------------------------- |
-| Theory  | 1 Jam  | Konsep blockchain & Avalanche |
-| Demo    | 1 Jam  | Setup wallet & frontend       |
-| Praktik | 1 Jam  | Implementasi connect wallet   |
+### 🔗 Blockchain
+
+- Avalanche C-Chain
+- Solidity
+- Hardhat
+- Viem
+- Wagmi
+
+### 🎨 Frontend
+
+- Next.js (App Router)
+- Tailwind CSS
+- TypeScript
+
+### ⚙️ Backend
+
+- NestJS
+- PostgreSQL (data transaksi)
+- MongoDB (event/log)
+
+### ☁️ Deployment
+
+- Avalanche Fuji Testnet
+- Vercel (Frontend)
+- VPS / Cloud (Backend)
 
 ---
 
-## 1️⃣ Theory (1 Jam)
-
-### 1.1 Apa itu Blockchain?
-
-Blockchain adalah **distributed ledger** yang:
-
-- Terdesentralisasi
-- Immutable (data tidak bisa diubah)
-- Transparan
-- Trustless (tidak perlu pihak ketiga)
-
-**Komponen utama blockchain:**
-
-- Block → kumpulan transaksi
-- Transaction → perubahan state
-- Node → mesin yang menjalankan blockchain
-- Consensus → cara node sepakat
-
----
-
-### 1.2 Apa itu dApp?
-
-dApp (Decentralized Application) terdiri dari:
-
-- **Frontend** → UI (Web / Mobile)
-- **Smart Contract** → Logic di blockchain
-- **Wallet** → Identitas & signer user
-
-#### Mental Model dApp (Penting)
+## 📁 Repository Structure
 
 ```bash
-User
-  ↓
-Frontend (HTML / JS)
-  ↓
-Wallet (Core)
-  ↓
-Blockchain (Avalanche C-Chain)
-```
-
-📌 **Catatan penting:**
-
-- Frontend **tidak langsung** mengirim transaksi ke blockchain
-- Wallet bertugas:
-  - Menyimpan private key
-  - Menandatangani transaksi
-  - Menjadi bridge ke blockchain
-
----
-
-### 1.3 dApp vs Web App
-
-| Web App                | dApp                          |
-| ---------------------- | ----------------------------- |
-| Login pakai email      | Login pakai wallet            |
-| Server terpusat        | Blockchain terdesentralisasi  |
-| Data bisa diubah admin | Data immutable                |
-| Session & cookie       | Signature & wallet connection |
-
-> 🔑 **Wallet bukan akun**, tapi **key manager & transaction signer**.
-
----
-
-### 1.4 Avalanche Fundamentals
-
-Avalanche adalah **high-performance blockchain** dengan:
-
-- Finalisasi transaksi cepat (<2 detik)
-- Biaya transaksi rendah
-- Ethereum-compatible (EVM)
-
-#### Arsitektur Avalanche
-
-- **X-Chain** → Asset creation & transfer
-- **P-Chain** → Validator & subnet
-- **C-Chain** → Smart contract (EVM)
-
-📌 Dalam course ini, kita **hanya menggunakan Avalanche C-Chain**.
-
----
-
-### 1.5 Avalanche Testnet vs Mainnet
-
-| Testnet               | Mainnet      |
-| --------------------- | ------------ |
-| Gratis (token faucet) | Token asli   |
-| Untuk belajar         | Production   |
-| Aman untuk eksperimen | Risiko nyata |
-
-➡️ Kita gunakan **Avalanche Fuji Testnet**.
-
----
-
-### 1.6 Wallet & Security Dasar
-
-- Wallet = Identitas di blockchain
-- Private key = Akses penuh ke aset
-- Seed phrase = Backup wallet
-
-❌ Jangan pernah share:
-
-- Private key
-- Seed phrase
-
-✅ Best practice:
-
-- Gunakan wallet khusus testnet
-- Jangan pakai wallet utama
-
----
-
-## 2️⃣ Demo (1 Jam)
-
-### 2.1 Install Core Wallet
-
-1. Buka [https://core.app/](https://core.app/)
-2. Install Core Wallet Extension
-3. Buat wallet baru
-4. Simpan seed phrase dengan aman
-
----
-
-### 2.2 Aktifkan Avalanche Fuji Testnet
-
-- Buka Core Wallet → Settings
-- Aktifkan **Fuji Testnet**
-
-Alternatif:
-
-- [Chainlist](https://chainlist.org/)
-- Manual configuration:
-
-```bash
-Network Name: Avalanche Fuji C-Chain
-Chain ID: 43113 (0xA869)
-Currency: AVAX
-RPC URL: https://api.avax-test.network/ext/bc/C/rpc
-Explorer: https://subnets-test.avax.network/c-chain
+avalanche-fullstack-dapp/
+├── apps/
+│   ├── frontend/     # Next.js dApp
+│   ├── backend/      # NestJS API
+│   └── contracts/    # Solidity & Hardhat
+│
+├── docs/             # Modul pembelajaran Day 1–Day 5
+├── docker/           # Optional docker setup
+├── .env.example
+└── README.md
 ```
 
 ---
 
-### 2.3 Mendapatkan AVAX Testnet
+## 🗓️ Course Structure (5 Hari)
 
-1. Sign in ke [Avalanche Builder Hub](https://build.avax.network/login)
-2. Buka menu [Testnet Faucet](https://build.avax.network/console/primary-network/faucet)
-3. Ikuti instruksi
-4. Claim AVAX testnet
+| Hari  | Fokus                      | Output                                    |
+| ----- | -------------------------- | ----------------------------------------- |
+| Day 1 | Blockchain & Avalanche     | Wallet connect ke dApp                    |
+| Day 2 | Smart Contract             | Contract deploy ke Avalanche Fuji Testnet |
+| Day 3 | Frontend dApp with Next.js | Interaksi smart contract                  |
+| Day 4 | Backend API with NestJS    | Simpan data off-chain                     |
+| Day 5 | Integration & Deploy       | Full stack dApp live                      |
+
+📘 Modul lengkap tersedia di folder [`/docs`](./docs)
 
 ---
 
-### 2.4 Clone & Jalankan Template Frontend
+## 🕒 Jadwal Pelaksanaan
+
+Short course ini dilaksanakan selama **5 hari** dengan jadwal sebagai berikut:
+
+- **Hari / Tanggal:**
+  **Senin, 12 Januari 2026 – Jumat, 16 Januari 2026**
+- **Waktu:**
+  **13.00 – 16.00 WIB**
+- **Tempat:**
+  Pamulang University (Remote)
+
+---
+
+## 🧪 Format Kegiatan Harian
+
+Setiap hari, sesi pembelajaran dibagi ke dalam beberapa bagian berikut:
+
+- **Pretest**
+  Untuk mengukur pemahaman awal peserta
+- **Materi (1 jam)**
+  Penjelasan konsep utama sesuai modul harian
+- **Demo (1 jam)**
+  Live coding & demonstrasi implementasi
+- **Penjelasan Tugas (1 jam)**
+  Breakdown tugas harian & expected output
+- **Postest**
+  Untuk mengukur pemahaman setelah sesi
+
+---
+
+## 🎓 Kriteria Kelulusan & Sertifikat
+
+Peserta **berhak mendapatkan sertifikat kelulusan** apabila memenuhi seluruh kriteria berikut:
+
+- **Kehadiran pretest & postest minimal 70%**
+- **Nilai postest minimal 70%**
+- **Mengerjakan seluruh tugas harian (100%)**
+
+Sertifikat diberikan sebagai bukti penyelesaian
+**Avalanche Full Stack dApp Short Course**.
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Clone Repository
 
 ```bash
 git clone https://github.com/avalanche-indonesia/pamulang-university-short-course.git
-cd pamulang-university-short-course/apps/frontend
-npx serve .
+cd avalanche-fullstack-dapp
 ```
 
-Akses:
+---
+
+### 2️⃣ Prerequisites
+
+Pastikan sudah terinstall:
+
+- Git [link](https://git-scm.com/install/)
+- Node.js ≥ 22 [link](https://nodejs.org/en/download)
+- npm / yarn / pnpm (bagian dari no. 1)
+- Core Wallet [link](https://core.app/download) download bagian chrome extension
+
+---
+
+### 3️⃣ Setup Environment Variables
+
+Copy file `.env.example` dan sesuaikan:
 
 ```bash
-http://localhost:3000
+cp .env.example .env
+```
+
+Setiap aplikasi (`frontend`, `backend`, `contracts`) memiliki `.env.example` masing-masing.
+
+---
+
+## 🧪 Menjalankan Project (Development)
+
+### 🔹 Frontend
+
+```bash
+cd apps/frontend
+npm install
+npm run dev
+```
+
+Akses: `http://localhost:3000`
+
+---
+
+### 🔹 Smart Contract
+
+```bash
+cd apps/contracts
+npm install
+npx hardhat compile
+npx hardhat test
+```
+
+Deploy ke Avalanche Fuji:
+
+```bash
+npx hardhat run scripts/deploy.ts --network fuji
 ```
 
 ---
 
-### 2.5 Demo Connect Wallet
+### 🔹 Backend
 
-Yang didemokan:
+```bash
+cd apps/backend
+npm install
+npm run start:dev
+```
 
-- Button **Connect Wallet**
-- Request wallet access
-- Ambil wallet address
-- Deteksi `chainId`
-- Validasi Avalanche Fuji network
-
-📌 **Catatan teknis ringan:**
-
-- `window.ethereum` → provider dari wallet
-- Hari ini kita **belum pakai RPC langsung**
+API berjalan di: `http://localhost:3001`
 
 ---
 
-### 2.6 Common Errors (Demo Cepat)
+## 🔐 Environment & Security Notes
 
-- Wallet belum unlock
-- User reject request
-- Wrong network
-- Wallet belum terinstall
-
----
-
-## 3️⃣ Praktik / Homework (1 Jam)
-
-### 🎯 Objective Praktik
-
-Peserta mampu **menghubungkan wallet ke frontend secara mandiri**.
+- Jangan commit file `.env`
+- Jangan share private key / mnemonic
+- Gunakan wallet khusus testnet untuk belajar
 
 ---
 
-### 3.1 Task 1 – Wallet Connection
+## 📦 Deployment Overview
 
-Implementasikan:
+- **Smart Contract:** Avalanche Fuji Testnet
+- **Frontend:** Vercel
+- **Backend:** VPS / Cloud (Docker optional)
 
-- Button `Connect Wallet`
-- Request wallet permission
-- Ambil wallet address
-- Simpan ke state JS
-
----
-
-### 3.2 Task 2 – Network Validation
-
-- Deteksi `chainId`
-- Tampilkan status:
-
-  - ✅ Avalanche Fuji
-  - ❌ Wrong Network
+Detail deployment dijelaskan pada **Day 5 module**.
 
 ---
 
-### 3.3 Task 3 – UI Display
+## 📘 Learning Modules
 
-Tampilkan di UI:
-
-- Wallet address
-- Balances
-- Network name
-- Connection status
-- Tambahkan nama lengkap dan NIM kalian sebagai peserta setelah wallet address (WAJIB)
-
----
-
-### 3.4 Task 4 – Improvement (Opsional)
-
-- Disable button setelah connect
-- Shorten address (`0x1234...abcd`)
-- Listen event:
-
-  - `accountsChanged`
-  - `chainChanged`
-
-- Tambahkan UI error handling
+| Module | Link                                             |
+| ------ | ------------------------------------------------ |
+| Day 1  | [`docs/day-1/README.md`](./docs/day-1/README.md) |
+| Day 2  | [`docs/day-2/README.md`](./docs/day-2/README.md) |
+| Day 3  | [`docs/day-3/README.md`](./docs/day-3/README.md) |
+| Day 4  | [`docs/day-4/README.md`](./docs/day-4/README.md) |
+| Day 5  | [`docs/day-5/README.md`](./docs/day-5/README.md) |
 
 ---
 
-## 🧪 Checklist Praktik
+## 🏁 Final Output
 
-- [ ] Memiliki akun di builder hub Avalanche https://build.avax.network/login
-- [ ] Core wallet terinstall
-- [ ] Avalanche Fuji Testnet aktif
-- [ ] Frontend berjalan
-- [ ] Wallet bisa connect
-- [ ] Network terdeteksi dengan benar
+Pada akhir course, peserta memiliki:
 
-[Submission Link](https://forms.gle/bs6UtUejoe3Yupv9A) aktif selama 48 jam, deadline Tanggal 14 Jan 2026 pukul 23.59 WIB
+- 1 Full Stack dApp aktif
+- Smart contract di Avalanche Testnet
+- Frontend & Backend production-ready
+- Repository GitHub untuk portfolio
 
 ---
 
-## ✅ Output Day 1
+## 🤝 Contributing
 
-Pada akhir Day 1:
-
-- Frontend bisa connect ke Core Wallet
-- Wallet address dan balances tampil di UI
-- Network Avalanche Fuji Testnet terdeteksi
-- Peserta memahami alur dasar dApp
-- Template siap lanjut Day 2
+Project ini dibuat untuk kebutuhan edukasi.
+Pull request & improvement sangat dipersilakan.
 
 ---
 
-## 🚀 Preview Day 2
+## 📄 License
 
-Di Day 2, kita akan:
-
-- Menulis smart contract pertama
-- Menggunakan Solidity & Hardhat
-- Deploy ke Avalanche Fuji Testnet
-- Verifikasi contract di Snowtrace
+MIT License
 
 ---
 
-## 📚 Referensi Tambahan
-
-- Avalanche Academy:
-  [https://build.avax.network/academy](https://build.avax.network/academy)
-
----
-
-## Post-Test
-
-[Link](https://forms.gle/x2bzfVa7wjNj2j4s6)
-
----
-
-## Feedback
-
-[Link](https://forms.gle/T9JtUm2L1EK5XZLK7)
-
----
-
-🔥 **Happy building!**
-Besok kita mulai masuk ke **smart contract & Solidity** 🚀
+Happy building on Avalanche 🚀
